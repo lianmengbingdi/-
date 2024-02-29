@@ -1,0 +1,291 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>校园食评</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/post_1.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/nebula-star.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/reset.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/style.css'%}" />
+  </head>
+
+  <body>
+    <div class="banner">
+      <div class="left-text">欢迎来到校园食评
+        <a target="_blank" class="now_school">
+          <span class="map-icon"></span>
+          <span class="J-current-city"style="text-decoration: none; color: white;font-size: 15px">{{restaurant.school_name}}</span>
+        </a>
+      </div>
+        <div class="right-text">
+        <a href ="/logout" style="text-decoration: none; color: white">
+        退出登录
+        </a>
+        </div>
+        <div class="right-text">|</div>
+        <div class="right-text">
+          <a href ="/" style="text-decoration: none; color: white">
+          主页
+          </a>
+          </div>
+          <div class="right-text">|</div>
+        <div class="right-text">
+        <a href="/my_homepage" style="text-decoration: none; color: white">欢迎，{{ user.first_name }}</a>
+        </div>
+      </div>
+    </br>
+</br>
+</br>
+
+    <div style="display: flex; justify-content: space-between">
+      <div class="top">
+        <div class="container">
+          <ul class="clearfix">
+            <li><a href="{% url 'create_post' restaurant.school_name %}" target="_blank">推荐新店</a></li>
+            <!-- <li><a href="javascript:;">关于作者</a></li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div id="basic-info" class="basic-info default nug_shop_ab_pv-a">
+        <s class="cover J_cover"></s>
+        <h1 class="shop-name">
+          {{ restaurant.title }}
+
+        </h1>
+        <div class="brief-info">
+          <div class="star-wrapper">
+            {% if restaurant.avg_score|default:" " >= 0 and restaurant.avg_score|default:" " < 0.25 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str0">
+            {% elif restaurant.avg_score|default:" " >= 0.25 and restaurant.avg_score|default:" " < 0.75 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str5">
+            {% elif restaurant.avg_score|default:" " >= 0.75 and restaurant.avg_score|default:" " < 1.25 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str10">
+            {% elif restaurant.avg_score|default:" " >= 1.25 and restaurant.avg_score|default:" " < 1.75 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str15">
+            {% elif restaurant.avg_score|default:" " >= 1.75 and restaurant.avg_score|default:" " < 2.25 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str20">
+            {% elif restaurant.avg_score|default:" " >= 2.25 and restaurant.avg_score|default:" " < 2.75 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str25">
+            {% elif restaurant.avg_score|default:" " >= 2.75 and restaurant.avg_score|default:" " < 3.25 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str30">
+            {% elif restaurant.avg_score|default:" " >= 3.25 and restaurant.avg_score|default:" " < 3.75 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str35">
+            {% elif restaurant.avg_score|default:" " >= 3.75 and restaurant.avg_score|default:" " < 4.25 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str40">
+            {% elif restaurant.avg_score|default:" " >= 4.25 and restaurant.avg_score|default:" " < 4.75 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str45">
+            {% elif restaurant.avg_score|default:" " >= 4.75 and restaurant.avg_score|default:" " < 5.25 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str50">
+              {% else %}
+              <div class="nebula-mid-rank-stars nebula-mid-str0">
+            {% endif %}
+            </div>
+            {% if restaurant.avg_score|default:" " >= 0 and restaurant.avg_score|default:" " < 0.25 %}
+            <div class="mid-score score-0">
+              {% elif restaurant.avg_score|default:" " >= 0.25 and restaurant.avg_score|default:" " < 0.75 %}
+            <div class="mid-score score-5">
+              {% elif restaurant.avg_score|default:" " >= 0.75 and restaurant.avg_score|default:" " < 1.25 %}
+            <div class="mid-score score-10">
+              {% elif restaurant.avg_score|default:" " >= 1.25 and restaurant.avg_score|default:" " < 1.75 %}
+            <div class="mid-score score-15">
+              {% elif restaurant.avg_score|default:" " >= 1.75 and restaurant.avg_score|default:" " < 2.25 %}
+            <div class="mid-score score-20">
+              {% elif restaurant.avg_score|default:" " >= 2.25 and restaurant.avg_score|default:" " < 2.75 %}
+            <div class="mid-score score-25">
+              {% elif restaurant.avg_score|default:" " >= 2.75 and restaurant.avg_score|default:" " < 3.25 %}
+            <div class="mid-score score-30">
+              {% elif restaurant.avg_score|default:" " >= 3.25 and restaurant.avg_score|default:" " < 3.75 %}
+            <div class="mid-score score-35">
+              {% elif restaurant.avg_score|default:" " >= 3.75 and restaurant.avg_score|default:" " < 4.25 %}
+            <div class="mid-score score-40">
+              {% elif restaurant.avg_score|default:" " >= 4.25 and restaurant.avg_score|default:" " < 4.75 %}
+            <div class="mid-score score-45">
+              {% elif restaurant.avg_score|default:" " >= 4.75 and restaurant.avg_score|default:" " < 5.25 %}
+            <div class="mid-score score-50">
+
+            {% else %}
+              <div>
+            {% endif %}{{ restaurant.avg_score|default:" " }}</div>
+          </div>
+          <span id="reviewCount" class="item">{{ restaurant.comment_count }}条评价</span>
+          <span id="avgPriceTitle" class="item">人均：￥{{ restaurant.avg_cost|default:" " }}</span>
+          <span id="comment_score">
+            <span class="item">口味：{{ restaurant.avg_score1|default:"暂无" }}</span>
+            <span class="item">环境：{{ restaurant.avg_score2|default:"暂无" }}</span>
+            <span class="item">服务：{{ restaurant.avg_score3|default:"暂无" }}</span>
+            <span class="item">性价比：{{ restaurant.avg_score4|default:"暂无" }}</span>
+          </span>
+        </div>
+        <div class="expand-info address" itemprop="street-address">
+          <span class="info-name">地址：</span>
+          <div id="J_map-show" class="map_address">
+            <span class="item" itemprop="street-address" id="address"
+              >{{ restaurant.address|default:'无' }}</span
+            >
+            <div class="addressIcon"></div>
+
+
+          </div>
+        </div>
+        <p class="expand-info tel">
+          <span class="info-name">电话：</span>{{ restaurant.phone|default:" " }}
+        </p>
+        <div class="promosearch-wrapper">
+          <p class="expand-info J-service nug-shop-ab-special_a">
+            <span class="info-name">就餐方式：{{ restaurant.dining_methods }}</span>
+          </p>
+        </div>
+        <div class="action">
+          <a
+            class="write left-action"
+            href="{% url 'create_comment' restaurant.id %}"
+            target="_blank"
+            rel="nofollow"
+            data-click-name="写评价"
+          >
+            <i class="icon"></i><span id="dpReviewBtn">写评价</span></a
+          >
+          <div id="booking-wrapper" data-click-name="订座"></div>
+          <span class="right-action">
+            <a
+              id="fav"
+              class="favorite J-favorite"
+              rel="nofollow"
+              title="收藏"
+              data-click-name="收藏"
+              ><i class="icon"></i
+            ></a>
+            
+          </span>
+        </div>
+
+        <div id="tuiguangAd-wrapper"></div>
+      </div>
+      <div id="myreview-wrapper"></div>
+      <div id="comment" class="mod comment" data-render="1">
+        <h2 class="mod-title J-tab">
+          <a
+            class="item all-review"
+            data-type="all"
+            
+            >网友评价<span class="sub-title">({{ restaurant.comment_count }})</span></a
+          >
+        </h2>
+
+        <div id="attributefilter-wrapper"></div>
+        <ul class="comment-list J-list" id="reviewlist-wrapper">
+
+          {% for comment in comments.all %}
+          <!-- 点评用户 -->
+  
+          <li
+            class="comment-item"
+            id="rev_1444935061"
+            data-id="1444935061"
+            xmlns="http://www.w3.org/1999/html"
+          >
+            <!-- 头像 -->
+            <a
+              class="avatar J-avatar"
+              target="_blank"
+              rel="nofollow"
+              href="{% url 'check_user' comment.author %}"
+              data-user-id="161171754"
+              data-click-name="用户头像0"
+              data-click-title="图片"
+            >
+            {% for user in users.all %}
+            {% if user.user_name == comment.author %}
+             {% if user.has_image %}
+              <img src="{{ user.get_image_url }}" alt="Comment Image">
+             {% endif %}
+             {% endif %}
+             {% endfor %}
+            </a>
+  
+            
+            <p class="user-info">
+              <a
+                class="name"
+                target="_blank"
+                rel="nofollow"
+                title=""
+                href="{% url 'check_user' comment.author %}"
+                data-click-name="用户名0"
+                data-click-title="文字"
+                >{{comment.nickname}}</a
+              >
+  
+  
+            </p>
+            <!-- 评价内容 -->
+            <div class="content">
+  
+              <p class="desc">
+                {{ comment.content }}
+              </p>
+              <div class="photos">
+              {% if comment.has_image %}
+  
+                <div>
+                  <a
+                    class="item J-photo"
+                    target="_blank"
+  
+                    data-click-name="评价图片0-0"
+                    data-click-title="图片"
+                    >
+                    
+                    <img src="{{ comment.get_image_url }}" alt="Comment Image"  onclick="openImageInNewTab('{{ comment.get_image_url }}')">
+                    
+                  </a>
+                </div>
+              
+                {% endif %}
+  
+              </div>
+              
+              <div class="misc-info" id="review_1444935061_action" >
+                
+  
+                <span class="time" >{{ comment.comment_time }}</span>
+  
+                <span class="shop">{{ restaurant.title }}</span>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+  
+        </ul>
+
+      </div>
+      
+    </div>
+
+
+    <div style="position: absolute; left: -9999px; top: -9999px;" id="hiddenDiv">
+    <span id="username">{{ user.username }}</span>
+    <span id="restaurantId">{{ restaurant.id }}</span>
+    </div>
+
+
+    <footer>
+      <p>&copy; 2023 校园食评</p>
+    </footer>
+    <script src="{% static 'js/map.js' %}"></script>
+    <script src="{% static 'js/favorite.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script>
+      function openImageInNewTab(imageUrl) {
+        // 在新标签页中打开图片
+        window.open(imageUrl, '_blank');
+      }
+    </script>
+  </body>
+</html>
+

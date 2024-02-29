@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ nickname }}的个人主页</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/personal_hp2.css' %}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url("{% static 'images/background1.jpg' %}");
+            background-color: rgba(255, 255, 255, 0.7); /*背景颜色的透明度，取值范围为0到1*/
+            background-blend-mode: overlay; /*混合模式，使背景颜色与背景图片混合*/
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+
+</head>
+
+<body onload="checkURL()" onfocus="enable_submit_button()">
+<script src="{% static 'js/personal_hp2.js' %}"></script>
+<div class="banner">
+    <div class="left-text">欢迎来到校园食评</div>
+    <div class="right-text" id="feedback">
+        <a href="#" onclick="feedback()">反馈</a>
+    </div>
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <form>
+            <label id="label_option">反馈：</label>
+            <textarea name="feedback" class="input_feedback" id="feed_back"
+                      placeholder="请在此输入您的意见或建议并提交。"></textarea>
+            <button type="button" class="button2" onclick="back_to_this_URL()">关闭</button>
+            <button type="submit" class="button2" id="feedback_submit_button" onclick="check_feedback()">提交</button>
+        </form>
+    </div>
+    <div class="right-text">
+        <a href="/logout">退出</a></div>
+    <div class="right-text">
+        <a href="/">主页</a></div>
+</div>
+<br>
+<br>
+<br>
+<div class="left-bar">
+    <div style="width: 200px; margin-top: 150px;">
+        <div class="profile-pic">
+            <img src="{{ user_info.get_image_url }}" alt="User Profile">    <!--取出该用户的头像图片-->
+        </div>
+        <p id="name_change" style="text-align: center">{{ nickname }}</p>   <!--取出要访问的用户的用户名-->
+        <p id="school_change" style="text-align: center">{{ user_info.school_name }}</p></div>    <!--取出要访问的用户的学校-->
+    <button class="button1" onclick="showSection(1)">个人信息</button>
+    <button class="button1" onclick="showSection(2)">ta的收藏</button>
+    <button class="button1" onclick="showSection(3)">ta的帖子</button>
+    <button class="button1" onclick="showSection(4)">ta的评论</button>
+</div>
+<div>
+    <div id="Section1" style="display: block">
+        <!--修改个人信息模块内容-->
+        <h3 class="my_info_header">个人信息资料</h3>
+        <div style="position: relative;text-align: center;top: 150px;color: black">
+            <div class="info-container">
+            <div class="hover-area">
+                <span id="option1">昵称</span>
+                <br>
+                <span id="content1">{{ nickname }}</span>
+            </div>
+            <div class="hover-area">
+                <span id="option2">所属学校</span>
+                <br>
+                <span id="content2">{{ user_info.school_name }}</span>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="hover-area">
+                <span id="option3">注册日期</span>
+                <br>
+                <span id="content3">{{ user_info.register_date }}</span>
+            </div>
+            <!--继续添加他人信息--></div>
+        </div>
+    </div>
+    <div id="Section2" style="display: none;margin-top: 110px">
+        <!--修改ta的收藏模块内容-->
+        <ul class="list-view">
+            {% for user_fav_post in user_fav_posts.all %}
+            <li>
+                <a href="{% url 'restaurant_detail' user_fav_post.id %}" class="view-button">
+                    <div class="list-item">
+                        {% if user_fav_post.has_image %}
+                        <img src="{{ user_fav_post.get_image_url }}" alt="收藏的店家图片">
+                        {% endif %}
+                        <div class="item-details">
+                            <h2>{{ user_fav_post.title }}</h2>
+                            <p>{{ user_fav_post.dining_methods }}</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="Section3" style="display: none;margin-top: 110px">
+        <!--修改ta的帖子模块内容-->
+        <ul class="list-view">
+            {% for user_post in user_posts.all %}
+            <li>
+                <a href="{% url 'restaurant_detail' user_post.id %}" class="view-button">
+                    <div class="list-item">
+                        {% if user_post.has_image %}
+                        <img src="{{ user_post.get_image_url }}" alt="帖子图片">
+                        {% endif %}
+                        <div class="item-details">
+                            <h2>{{ user_post.title }}</h2>
+                            <p>{{ user_post.dining_methods }}</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            {% endfor %}
+            <!-- 继续添加更多帖子项 -->
+        </ul>
+    </div>
+    <div id="Section4" style="display: none;margin-top: 110px">
+        <!--修改ta的评论模块内容-->
+        <ul class="list-view">
+           {% for user_comment in user_comments.all %}
+            <li>
+                <a href="{% url 'restaurant_detail' user_comment.post.id %}" class="view-button">
+                    <div class="list-item">
+                        {% if user_comment.has_image %}
+                        <img src="{{ user_comment.get_image_url }}" alt="评论图片">
+                        {% endif %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="item-details">
+                            <h2>{{ user_comment.post.title }}</h2>
+                            <p>{{ user_comment.content }}</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            {% endfor %}
+            <!-- 继续添加更多帖子项 -->
+        </ul>
+    </div>
+
+</div>
+</body>
+
+</html>

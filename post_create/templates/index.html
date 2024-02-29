@@ -1,0 +1,308 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>校园食评</title>
+    <!-- <link rel="stylesheet" href="../static/css/reset.css" /> -->
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index_2.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index_1.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/nebula-star.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+  </head>
+ 
+  <body>
+    <div class="container">
+    <div class="banner">
+      <div class="left-text">欢迎来到校园食评
+        <a target="_blank" class="now_school">
+          <span class="map-icon"></span>
+          <span class="J-current-city"style="text-decoration: none; color: white;font-size: 15px">{{school}}</span>
+        </a>
+      </div>
+      <div class="right-text">
+        <a href ="/logout" style="text-decoration: none; color: white">
+        退出登录
+        </a>
+        </div>
+        <div class="right-text">|</div>
+        <div class="right-text">
+          <a href ="/" style="text-decoration: none; color: white">
+          主页
+          </a>
+          </div>
+          <div class="right-text">|</div>
+        <div class="right-text">
+        <a href="/my_homepage" style="text-decoration: none; color: white">欢迎，{{ user.first_name }}</a>
+        </div>
+      </div>
+    </br>
+</br>
+</br>
+
+    <div style="display: flex; justify-content: space-between">
+      <div class="top">
+        <div class="container">
+          <ul class="clearfix">
+            <li><a href="{% url 'create_post' school %}" >推荐新店</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="content-wrap">
+      <div class="shop-wrap">
+        <div class="content">
+          <div class="filter-box J_filter_box">
+            
+            <div class="filt-classify">
+            </div>
+            <div class="filt-service">
+              <ul>
+                <li>
+                  <a
+                    href = "{% url 'index' school=school sort='总体' %}"
+                    rel="nofollow"
+                    {% if sort == "总体" %}
+                    class="cur"
+                    {% endif %}
+                    data-click-name="sort_default_click"
+                    >总体<i class="icon-arr-down"></i></a
+                  ><em class="sep">|</em>
+                </li>
+                <li>
+                  <a
+                    href = "{% url 'index' school=school sort='性价比' %}"
+                    {% if sort == "性价比" %}
+                    class="cur"
+                    {% endif %}
+                    rel="nofollow"
+                    data-click-name="sort_review_click"
+                    >性价比<i class="icon-arr-down"></i></a
+                  ><em class="sep">|</em>
+                  <!-- <i class="icon-arr-down"></i> -->
+                </li>
+                <!-- <li>
+                  <a
+                  href = "{% url 'index' school=school sort='人气' %}"
+                    rel="nofollow"
+                    data-click-name="sort_hot_click"
+                    >人气<i class="icon-arr-down"></i></a
+                  ><em class="sep">|</em>
+                </li> -->
+                <li>
+                  <a
+                  href = "{% url 'index' school=school sort='口味' %}"
+                  {% if sort == "口味" %}
+                    class="cur"
+                    {% endif %}
+                    rel="nofollow"
+                    data-click-name="sort_custom_口味_click"
+                    >口味<i class="icon-arr-down"></i></a
+                  ><em class="sep">|</em>
+                </li>
+               <li class="fs-slt"id="fs-slt-1">
+                  <a>其他排序<i class="icon-arr-extend"></i></a>
+                  <em class="sep">|</em>
+                  <div class="slt-list" style="display: none;" id="slt-list-1">
+                    <span class="tit">其他排序<i class="icon-arr-packup"></i></span>
+                    <a href = "{% url 'index' school=school sort='评价' %}" 
+                    {% if sort == "评价" %}
+                    class="cur"
+                    {% endif %}rel="nofollow" data-order="2" data-click-name="sort_other_评价最多_click"style="font-size: 14px; ">评价最多</a>
+                    <a href = "{% url 'index' school=school sort='环境' %}"
+                    {% if sort == "环境" %}
+                    class="cur"
+                    {% endif %}rel="nofollow" data-order="2" data-click-name="sort_other_环境最佳_click"style="font-size: 14px; ">环境最佳</a>
+                    <a href = "{% url 'index' school=school sort='服务' %}"
+                    {% if sort == "服务" %}
+                    class="cur"
+                    {% endif %}rel="nofollow" data-order="2" data-click-name="sort_other_服务最佳_click"style="font-size: 14px; ">服务最佳</a>
+                    
+                  </div>
+                </li>                
+              <li class="fs-slt" id="fs-slt-2">
+                  <a class="fs-price-tit"><span class="avgprice">
+                      人均<i class="icon-arr-extend"></i></span></a>
+                      <div class="slt-list per-capita" style="display: none;"id="slt-list-2">
+                        <span class="tit">人均<i class="icon-arr-packup"></i></span>
+    
+                        <a href = "{% url 'index' school=school sort='人均最高' %}"
+                        {% if sort == "人均最高" %}
+                        class="cur"
+                        {% endif %}data-click-name="sort_avgprice_max_click" rel="nofollow" style="font-size: 14px; "title="">人均最高</a>
+                        <a  href = "{% url 'index' school=school sort='人均最低' %}"
+                        {% if sort == "人均最低" %}
+                        class="cur"
+                        {% endif %}data-click-name="sort_avgprice_min_click" rel="nofollow" style="font-size: 14px; "title="">人均最低</a>
+    
+                        
+                    </div>
+                </li>        
+              </ul>
+            </div>
+            
+          </div>
+          <div class="shop-list J_shop-list shop-all-list" id="shop-all-list">
+            <ul>
+    {% for restaurant in restaurants %}
+    <li class="">
+        <div class="pic">
+            <a target="_blank" href="{% url 'restaurant_detail' restaurant.id %}">
+                {% if restaurant.has_image %}
+                    <img src="{{ restaurant.get_image_url }}" alt="Post Image">
+                    {% endif %}
+            </a>
+        </div>
+        <div class="txt">
+            <div class="tit">
+                <a target="_blank" href="{% url 'restaurant_detail' restaurant.id %}">
+                    <h4>{{ restaurant.title }}</h4>
+                </a>
+
+                    <div class="promo-icon J_promo_icon"></div>
+                  </div>
+
+                  <div class="comment">
+                    <div class="nebula_star">
+                      <div class="star_icon">
+                        {% if restaurant.avg_score|default:" " >= 0 and restaurant.avg_score|default:" " < 0.25 %}
+                        <span class="star star_0 star_sml"></span>
+                        <span class="star star_0 star_sml"></span>
+                        <span class="star star_0 star_sml"></span>
+                        <span class="star star_0 star_sml"></span>
+                        <span class="star star_0 star_sml"></span>
+            {% elif restaurant.avg_score|default:" " >= 0.25 and restaurant.avg_score|default:" " < 0.75 %}
+                        <span class="star star_5 star_sml"></span>
+                        <span class="star star_5 star_sml"></span>
+                        <span class="star star_5 star_sml"></span>
+                        <span class="star star_5 star_sml"></span>
+                        <span class="star star_5 star_sml"></span>
+            {% elif restaurant.avg_score|default:" " >= 0.75 and restaurant.avg_score|default:" " < 1.25 %}
+                        <span class="star star_10 star_sml"></span>
+                        <span class="star star_10 star_sml"></span>
+                        <span class="star star_10 star_sml"></span>
+                        <span class="star star_10 star_sml"></span>
+                        <span class="star star_10 star_sml"></span>
+            {% elif restaurant.avg_score|default:" " >= 1.25 and restaurant.avg_score|default:" " < 1.75 %}
+                        <span class="star star_15 star_sml"></span>
+                        <span class="star star_15 star_sml"></span>
+                        <span class="star star_15 star_sml"></span>
+                        <span class="star star_15 star_sml"></span>
+                        <span class="star star_15 star_sml"></span>
+            {% elif restaurant.avg_score|default:" " >= 1.75 and restaurant.avg_score|default:" " < 2.25 %}
+                        <span class="star star_20 star_sml"></span>
+                        <span class="star star_20 star_sml"></span>
+                        <span class="star star_20 star_sml"></span>
+                        <span class="star star_20 star_sml"></span>
+                        <span class="star star_20 star_sml"></span>
+            {% elif restaurant.avg_score|default:" " >= 2.25 and restaurant.avg_score|default:" " < 2.75 %}
+                        <span class="star star_25 star_sml"></span>
+                        <span class="star star_25 star_sml"></span>
+                        <span class="star star_25 star_sml"></span>
+                        <span class="star star_25 star_sml"></span>
+                        <span class="star star_25 star_sml"></span>
+            {% elif restaurant.avg_score|default:" " >= 2.75 and restaurant.avg_score|default:" " < 3.25 %}
+                        <span class="star star_30 star_sml"></span>
+                        <span class="star star_30 star_sml"></span>
+                        <span class="star star_30 star_sml"></span>
+                        <span class="star star_30 star_sml"></span>
+                        <span class="star star_30 star_sml"></span>
+            {% elif restaurant.avg_score|default:" " >= 3.25 and restaurant.avg_score|default:" " < 3.75 %}
+                        <span class="star star_35 star_sml"></span>
+                        <span class="star star_35 star_sml"></span>
+                        <span class="star star_35 star_sml"></span>
+                        <span class="star star_35 star_sml"></span>
+                        <span class="star star_35 star_sml"></span>
+            {% elif restaurant.avg_score|default:" " >= 3.75 and restaurant.avg_score|default:" " < 4.25 %}
+                        <span class="star star_40 star_sml"></span>
+                        <span class="star star_40 star_sml"></span>
+                        <span class="star star_40 star_sml"></span>
+                        <span class="star star_40 star_sml"></span>
+                        <span class="star star_40 star_sml"></span>
+            {% elif restaurant.avg_score|default:" " >= 4.25 and restaurant.avg_score|default:" " < 4.75 %}
+                        <span class="star star_45 star_sml"></span>
+                        <span class="star star_45 star_sml"></span>
+                        <span class="star star_45 star_sml"></span>
+                        <span class="star star_45 star_sml"></span>
+                        <span class="star star_45 star_sml"></span>
+            {% elif restaurant.avg_score|default:" " >= 4.75 and restaurant.avg_score|default:" " < 5.25 %}
+                        <span class="star star_50 star_sml"></span>
+                        <span class="star star_50 star_sml"></span>
+                        <span class="star star_50 star_sml"></span>
+                        <span class="star star_50 star_sml"></span>
+                        <span class="star star_50 star_sml"></span>
+            
+              {% else %}
+                        <span class="star star_0 star_sml"></span>
+                        <span class="star star_0 star_sml"></span>
+                        <span class="star star_0 star_sml"></span>
+                        <span class="star star_0 star_sml"></span>
+                        <span class="star star_0 star_sml"></span>
+            {% endif %}
+                        
+                      </div>
+                    </div>
+
+                    <a href="{% url 'restaurant_detail' restaurant.id %}#comment"
+                       class="review-num"
+                       data-click-name="shop_iwant_review_click"
+                       data-shopid="k3ZbV7SZiJdS33o8" target="_blank"
+                       module="list-readreview"
+                       rel="nofollow">
+                        <b>{{ restaurant.comment_count }}</b>条评价
+                    </a>
+
+
+                    <em class="sep">|</em>
+                    <a
+                      href="{% url 'restaurant_detail' restaurant.id %}"
+                      class="mean-price"
+                      data-click-name="shop_avgprice_click"
+                      data-shopid="k3ZbV7SZiJdS33o8"
+                      target="_blank"
+                      rel="nofollow"
+                    >
+                      人均
+                      <b>￥{{ restaurant.avg_cost|default:"暂无" }}</b>
+                    </a>
+                  </div>
+
+                  <div class="tag-addr">
+                    <a
+                      
+                      data-click-name="shop_tag_cate_click"
+                      data-shopid="k3ZbV7SZiJdS33o8"
+                      ><span class="tag">{{ restaurant.dining_methods|default:"" }}</span></a
+                    >
+                    <!-- <em class="sep">|</em>
+                    <a
+                      
+                      data-click-name="shop_tag_region_click"
+                      data-shopid="k3ZbV7SZiJdS33o8"
+                      ><span class="tag">静安寺</span></a
+                    > -->
+                  </div>
+
+                  <div class="recommend">                     
+                    <span>地址：{{ restaurant.address|default:"暂无地址" }}</span>                  
+                </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="{% static 'js/li_toggle.js' %}"></script>
+    <script src="{% static 'js/other_list.js' %}"></script>
+<footer>
+  <p>&copy; 2023 校园食评</p>
+</footer>
+</div>
+  </body>
+  
+</html>

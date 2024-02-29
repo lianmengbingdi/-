@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+.card-container {
+    display: flex; /* 将容器设置为 Flex 布局 */
+    justify-content: center; /* 在主轴上居中对齐项目 */
+    align-items: center; /* 在交叉轴上居中对齐项目 */
+}
+
+.card1 {
+    width: 750px;
+    height: 500px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    overflow: hidden;
+}
+
+.card2 {
+    width: 600px;
+    height: 500px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    overflow: hidden;
+}
+
+.BMap_cpyCtrl {
+    display: none;  
+}
+    
+.anchorBL {
+    display: none;
+}
+
+.banner {
+    background-color: #6358c7;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    position: fixed;
+    line-height: 45px;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999; /* 确保横幅显示在其他内容之上 */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .left-text {
+    float: left;
+    padding-left: 20px;
+    font-family: "华文行楷", sans-serif;
+    font-size: 30px;
+  }
+  
+  /* 右边文本样式 */
+  .right-text {
+    float: right;
+    padding-right: 10px;
+  }
+
+  /* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #6358c7;
+    color: #fff;
+    bottom:0;
+  }
+  
+.guidelines-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-left: 20px;
+    margin: 20px;
+    background-color: #f5f5f5;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    width:1480px
+}

@@ -1,0 +1,183 @@
+/* Base styles */
+/* 基础设置 */
+h1,
+blockquote,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+pre,
+form,
+fieldset,
+legend,
+button,
+input,
+textarea,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #666;
+}
+
+.leftfix {
+  float: left;
+}
+
+.rightfix {
+  float: right;
+}
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  /* width: 1400px; */
+}
+
+.banner {
+  background-color: #6358c7;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+  position: fixed;
+  line-height: 45px;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999; /* 确保横幅显示在其他内容之上 */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.left-text {
+  float: left;
+  padding-left: 20px;
+  font-family: "华文行楷", sans-serif;
+  font-size: 30px;
+}
+
+/* 右边文本样式 */
+.right-text {
+  float: right;
+  padding-right: 10px;
+}
+
+/* #region 顶部导航 */
+.top {
+  /* background-color: aqua; */
+  height: 40px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.top li {
+  float: left;
+  height: 40px;
+  line-height: 40px;
+  color: #999;
+}
+
+.top li a {
+  font-size: 20px;
+  padding: 0 20px;
+  border-right: 1px #7f6666 solid;
+}
+
+.top li:first-child a {
+  padding-left: 0;
+}
+
+.top li:last-child a {
+  border: 0;
+}
+
+.search {
+  margin-top: -5px;
+}
+.search input {
+  margin-left: -200px;
+
+  width: 400px;
+}
+.search-icon {
+  width: 35px;
+  height: 35px;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 50px;
+}
+
+/* #endregion */
+/* Main content */
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Posts listing */
+
+/* Individual post */
+.post-content {
+  line-height: 1.5;
+}
+
+/* Comments */
+.comments {
+  margin-top: 20px;
+}
+
+.comment {
+  padding: 10px;
+  border: none;
+}
+
+/* Form */
+form {
+  margin-top: 20px;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #6358c7;
+  color: #fff;
+  bottom:0;
+}
+.now_school {
+  margin-left: 10px; /* 设置间隔为10像素，根据需要调整 */
+}
+.map-icon {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAC0ElEQVR4Xu2Z33HTQBDGdyV4JlQAVIBiFxBTAaGCmBni4Q1SAU4FhDdGYganAkwFiQuwOCqAEswroFvmJNmjRLL+xbfWoNVjsqe7/e333e3JCD1/sOf5gwAQBfScgFig5wKQTVAsIBboOQGxQM8FIKeAWEAs0HMCYoGeC2A/pwCNvQO4B0fgOF5cAK0V/IUFztSKuyCsFqBTzwNw3wPCqDBRohm4+hw/qp9cINgA0OlgDIifKxMjMio4wyCcVcbuIIAFQO3kswkRveSAYB0AvfYeg3Z/NC6WUYKrD23bwT6AydBI+aQxgGTAJfrLccuxtYZxADCefpBfDZ2jH07N31OLXOTiiFYYhA9rZdIyyCqAEvnnKkuTwRQA3+XycKInNm1gF4A59tD9VlD9M/RDU/HNQ6+8ETjuVS6WokMMlGpZ4MphVgHE8p4MKZ8UfcAgfHsDwJZjEv2l1TVafXni7+EcEJ7nIOjoGX5S10mMaZCcK0A8uBFH8BWD5XFlGe8QYB/ANmnHmYOR9mprZ5iBdIccS4daB5Du8teAeNQoCaIFBmFxy9zoReXBTAC2bYYli7O8+69nZgGQquACEN/UKh7lN8la41oE8QEwV+D7jgLER+XrpO/wW4+4rsZsAGIVlG2IayqWz/3b8FkBVFuBcg1SC1U3GsIOIGmOBgoAn3Kf+UVk9gMgaZFNE5Reknh9nwWxFwCJCoamw/sCAL+AopHNfr/ME3sDsNkPSM/XLXEj8+4omBVAfAqgcwKkL28nXfa/HeVa+Bo2ABnJA8QfPnEKoNNrrvk8TtPMZegF+su5zcT5O8GkEZpX3gmIFvBHH/+XjVDs++Qjqal48qPI5kEFTqRsfv3pzDHIIe26c7DtAXUXxB0nALiJd20+UUDXKsK9HlEAN/GuzScK6FpFuNcjCuAm3rX5RAFdqwj3ekQB3MS7Np8ooGsV4V5P7xXwD59n7UFy3pdvAAAAAElFTkSuQmCC);
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 35px;
+  vertical-align: middle;
+  background-size: 35px auto;
+  background-position: left center;
+  position: relative;
+  top: -1px;
+}

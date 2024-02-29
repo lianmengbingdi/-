@@ -1,0 +1,58 @@
+/* 基础设置 */
+h1,
+blockquote,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+pre,
+form,
+fieldset,
+legend,
+button,
+input,
+textarea,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #666;
+}
+.leftfix {
+  float: left;
+}
+
+.rightfix {
+  float: right;
+}
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.search {
+  margin-top: -5px;
+}
+.search input {
+  margin-left: -200px;
+  margin-top: 20px;
+  width: 400px;
+}
+.search-icon {
+  width: 35px;
+  height: 35px;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 50px;
+}

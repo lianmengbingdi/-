@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load  static %}
+<html lang="zh-CN" style="height: 100%">
+
+<head>
+    <meta charset="utf-8">
+    <title>校园食评</title>
+    <link rel="stylesheet" href="{% static 'css/style0.css' %}">
+</head>
+
+<body>
+<div class="banner">
+    <div class="left-text">欢迎来到校园食评</div>
+    {% if request.user.is_authenticated %}
+    <div class="right-text">
+        <a href="/logout" style="text-decoration: none; color: white">
+            退出登录
+        </a>
+    </div>
+    <div class="right-text">|</div>
+    <div class="right-text">
+        <a href="/my_homepage" style="text-decoration: none; color: white">欢迎，{{ user.first_name }}</a>
+    </div>
+    {% else %}
+    <div class="right-text">
+        <a href="/register" style="text-decoration: none; color: white">
+            注册
+        </a>
+    </div>
+    <div class="right-text">|</div>
+    <div class="right-text">
+        <a href="/login" style="text-decoration: none; color: white">
+            登录
+        </a>
+    </div>
+    {% endif %}
+</div>
+</br>
+</br>
+</br>
+</br>
+
+<div class="card-container">
+    <div class="card1">
+        <div id="map" style="height: 100%"></div>
+    </div>
+    <div class="card2">
+        <div id="container" style="height: 100%"></div>
+    </div>
+</div>
+<div class="card-container">
+    <div class="guidelines-card">
+        使用指南：
+        <ul>
+            <li>点击红点或排行榜进入论坛</li>
+            <li>点击头像位置上传头像</li>
+            <li>保护隐私，文明发言</li>
+        </ul>
+    </div>
+</div>
+<footer>
+    <p>&copy; 2023 校园食评</p>
+</footer>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/baidu.js'%}"></script>
+<script src="{% static 'js/echarts.min.js'%}"></script>
+<script src="{% static 'js/bmap.min.js'%}"></script>
+<script type="text/javascript" src="{% static 'js/self-map.js'%}"></script>
+<script type="text/javascript" src="{% static 'js/self-chart.js'%}"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const messages = document.querySelectorAll(".messages li");
+
+        messages.forEach(function (message) {
+            if (message.classList.contains("success")) {
+                alert( message.textContent);
+            } else if (message.classList.contains("error")) {
+                alert(message.textContent);
+            }
+        });
+    });
+</script>
+
+</body>
+
+</html>

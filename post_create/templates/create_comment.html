@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>校园食评</title>
+    <link rel="stylesheet" href="{% static 'css/create_1.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+    
+  </head>
+
+  <body>
+    <div class="banner">
+      <div class="left-text">欢迎来到校园食评
+        <a target="_blank" class="now_school">
+          <span class="map-icon"></span>
+          <span class="J-current-city"style="text-decoration: none; color: white;font-size: 15px">{{restaurant.school_name}}</span>
+        </a>
+      </div>
+      <div class="right-text">
+        <a href ="/logout" style="text-decoration: none; color: white">
+        退出登录
+        </a>
+        </div>
+        <div class="right-text">|</div>
+        <div class="right-text">
+          <a href ="/" style="text-decoration: none; color: white">
+          主页
+          </a>
+          </div>
+          <div class="right-text">|</div>
+        <div class="right-text">
+        <a href="/my_homepage" style="text-decoration: none; color: white">欢迎，{{ user.first_name }}</a>
+        </div>
+      </div>
+    </br>
+</br>
+</br>
+
+    <div style="display: flex; justify-content: space-between">
+      <div class="top">
+        <div class="container">
+          <ul class="clearfix">
+            <li><a href="{% url 'create_post' restaurant.school_name %}"target="_blank">推荐新店</a></li>
+            <!-- <li><a href="javascript:;">关于作者</a></li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-wrapper">
+      <div class="review-module">
+        <div class="review-left">
+          <div class="shop-info shop-info-wrapper">
+            <h1 class="shop-name">{{ restaurant.title }}</h1>
+            <div class="rank-info">
+              <div class="star-wrapper">
+                {% if restaurant.avg_score|default:" " >= 0 and restaurant.avg_score|default:" " < 0.25 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str0">
+            {% elif restaurant.avg_score|default:" " >= 0.25 and restaurant.avg_score|default:" " < 0.75 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str5">
+            {% elif restaurant.avg_score|default:" " >= 0.75 and restaurant.avg_score|default:" " < 1.25 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str10">
+            {% elif restaurant.avg_score|default:" " >= 1.25 and restaurant.avg_score|default:" " < 1.75 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str15">
+            {% elif restaurant.avg_score|default:" " >= 1.75 and restaurant.avg_score|default:" " < 2.25 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str20">
+            {% elif restaurant.avg_score|default:" " >= 2.25 and restaurant.avg_score|default:" " < 2.75 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str25">
+            {% elif restaurant.avg_score|default:" " >= 2.75 and restaurant.avg_score|default:" " < 3.25 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str30">
+            {% elif restaurant.avg_score|default:" " >= 3.25 and restaurant.avg_score|default:" " < 3.75 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str35">
+            {% elif restaurant.avg_score|default:" " >= 3.75 and restaurant.avg_score|default:" " < 4.25 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str40">
+            {% elif restaurant.avg_score|default:" " >= 4.25 and restaurant.avg_score|default:" " < 4.75 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str45">
+            {% elif restaurant.avg_score|default:" " >= 4.75 and restaurant.avg_score|default:" " < 5.25 %}
+            <div class="nebula-mid-rank-stars nebula-mid-str50">
+              {% else %}
+              <div class="nebula-mid-rank-stars nebula-mid-str0">
+            {% endif %}
+                </div>
+              </div>
+              <span class="reviews">{{ restaurant.comment_count }}条评价</span
+              ><span class="price">人均： ￥{{ restaurant.avg_cost|default:" " }}</span
+              ><span class="score"
+                ><span class="item">口味： {{ restaurant.avg_score1|default:"暂无" }}</span
+                ><span class="item">环境： {{ restaurant.avg_score2|default:"暂无" }}</span
+                ><span class="item">服务： {{ restaurant.avg_score3|default:"暂无" }}</span></span
+              >
+            </div>
+            <div class="address-info">
+              <span class="info-name">地址：</span
+              ><span class="street-address"> {{ restaurant.address }}</span>
+            </div>
+            <div class="tel">
+              <span class="info-name">电话：</span
+              ><span class="tel-number"> {{ restaurant.phone|default:" " }}</span
+              ><span class="tel-number">  </span>
+            </div>
+            <div class="more-wrap">
+              <a
+                class="action-view"
+                href="{% url 'restaurant_detail' restaurant.id %}"
+                target="_blank"
+                rel="noopener noreferrer"
+                >查看商家详情</a
+              >
+            </div>
+          </div>
+          <div class="review-body">
+            <div class="qr-code-module">
+              <div class="qr-code-wrap qr-code-container">
+                <div class="qr-roll">
+                  <div class="inner-qr-roll" role="presentation">
+                    <div class="wrap-qr-img">
+                      <span class="roll-corner"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="title">我要评价</div>
+              <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+                <div class="metric-star metric-star-wrapper">
+                    <input type="hidden" name="star_1" id="star_1_field" value="0">
+                    <input type="hidden" name="star_2" id="star_2_field" value="0">
+                    <input type="hidden" name="star_3" id="star_3_field" value="0">
+                    <input type="hidden" name="star_4" id="star_4_field" value="0">
+                    <input type="hidden" name="star_5" id="star_5_field" value="0">
+                <div class="metric-star-item">
+                <div class="rc-rate-name">
+                  总体评价<em class="rc-rate-required">*</em>
+                </div>
+                <ul class="rc-rate">
+                  <li
+                    class="rc-rate-item-1 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-1 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-1 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-1 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-1 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                </ul>
+                <div class="rc-rate-desc">点击星星给商户打分</div>
+              </div>
+              <div class="metric-star-item">
+                <div class="rc-rate-name">
+                  口味<em class="rc-rate-required">*</em>
+                </div>
+                <ul class="rc-rate">
+                  <li
+                    class="rc-rate-item-2 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-2 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-2 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-2 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-2 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                </ul>
+                <div class="rc-rate-desc">给口味打分</div>
+              </div>
+              <div class="metric-star-item">
+                <div class="rc-rate-name">
+                  环境<em class="rc-rate-required">*</em>
+                </div>
+                <ul class="rc-rate">
+                  <li
+                    class="rc-rate-item-3 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-3 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-3 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-3 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-3 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                </ul>
+                <div class="rc-rate-desc">给环境打分</div>
+              </div>
+              <div class="metric-star-item">
+                <div class="rc-rate-name">
+                  服务<em class="rc-rate-required">*</em>
+                </div>
+                <ul class="rc-rate">
+                  <li
+                    class="rc-rate-item-4 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-4 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-4 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-4 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-4 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                </ul>
+                <div class="rc-rate-desc">给服务打分</div>
+              </div>
+              <div class="metric-star-item">
+                <div class="rc-rate-name">
+                  性价比<em class="rc-rate-required">*</em>
+                </div>
+                <ul class="rc-rate">
+                  <li
+                    class="rc-rate-item-5 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-5 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-5 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-5 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                  <li
+                    class="rc-rate-item-5 rc-rate-score-zero"
+                    role="presentation"
+                  >
+                    <div class="rc-rate-first"></div>
+                    <div class="rc-rate-second"></div>
+                  </li>
+                </ul>
+                <div class="rc-rate-desc">给性价比打分</div>
+              </div>
+            </div>
+            <div class="text-area-module">
+              <div class="module-title-text">
+                评价<em class="required">*</em>
+              </div>
+              <div>
+                <div class="comment-body">
+                  <textarea
+                    class="comment-text-area"
+                    name="content"
+                    placeholder="亲，菜品的口味如何，环境怎么样，服务满意吗，性价比高吗？"
+                    style="
+                      overflow: hidden;
+                      overflow-wrap: break-word;
+                      resize: horizontal;
+                      height: 190px;
+                    "
+                  ></textarea>
+                  <div class="emoji-wrap">
+                    
+                    <div id="emoji-pannel" class="emoji-pannel-hide"></div>
+                    <div class="overnote blue">
+                      15<!-- -->~<!-- -->2000<!-- -->个字
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="upload-image-module">
+              <div class="module-title">图片</div>
+              <div class="upload-wrapper">
+                <div class="upload-info">
+                  <div class="upload-module">
+                    <input
+                      type="file"
+                      multiple=""
+                      name="image"
+                      accept="image/*"
+                      value=""
+                      class="upload-image"
+                      id="file"
+{#                      multiple#}
+                    /><button class="btn btn-1 btn-upload btn-image-upload">
+                      <span>上传图片</span>
+                    </button>
+                  </div>
+                  <div class="upload-desc">
+                    单张图片不超过10MB，尺寸不小于300*300px，支持jpg、png和bmp格式
+                  </div>
+                </div>
+                <div class="pic-wrapper"></div>
+                <!-- <button class="btn btn-1 btn-upload">
+                  <span>上传视频</span>
+                </button> -->
+              </div>
+            </div>
+            <div class="expense-module">
+              <div class="expense-item">
+                <div class="module-title">人均</div>
+                <div class="expense-wrapper">
+                  <input
+                    class="expense-input"
+                    type="text"
+                    name="per_person_cost"
+                    value="0"
+                    data-title="人均"
+                    data-index="0"
+                  />
+                  <div class="unit">元</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="warn">
+              评价和打分都将是其他网友的参考依据，并影响该商户评价。请发布真实、客观的本人消费体验评价。如您收到威逼、利诱如优惠等干扰而发布的评价或并非本人体验的虚假/恶意评价，则评价视为违规，同时影响您的信誉度。
+            </div>
+            <div class="btn-block-module">
+              <div class="btn-block-wrapper">
+                <div class="btn-wrapper">
+                  <button class="btn btn-2"><span>发表评价</span></button>
+                </div>
+                <div class="save-auto-hide">
+                  评价已经在
+                  <!-- -->
+                  自动保存
+                </div>
+              </div>
+              <div class="save-success-hide">
+                保存成功，此草稿仅可在PC端使用
+              </div>
+            </div>
+             </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2023 校园食评</p>
+    </footer>
+    <script src="{% static 'js/star_overall.js' %}"></script>
+    <script src="{% static 'js/star_taste.js' %}"></script>
+    <script src="{% static 'js/star_environment.js' %}"></script>
+    <script src="{% static 'js/star_serve.js' %}"></script>
+    <script src="{% static 'js/star_price.js' %}"></script>
+    <script src="{% static 'js/upload_pic.js' %}"></script>
+    <script src="{% static 'js/check_comment.js' %}"></script>
+    <script src="{% static 'js/save.js' %}"></script>
+    
+  </body>
+</html>

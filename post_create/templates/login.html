@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zh-CN" style="height: 100%">
+  <title>校园食评</title>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href={% static 'css/login_style.css' %}>
+  </head>
+
+  <body>
+    <div class="banner">
+      <div class="left-text">欢迎来到校园食评</div>
+      <!-- <div class="right-text">
+        <a href ="" style="text-decoration: none; color: white">
+        注册
+        </a>
+      </div>
+      <div class="right-text">|</div>
+      <div class="right-text">
+        <a href ="" style="text-decoration: none; color: white">
+        登录
+        </a>
+      </div> -->
+    </div>
+  </br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+    <div class="card-container">
+  </div>
+    <div class="container">
+
+      <form action="query" method="get" class="login_form">
+        <h2>登录</h2>
+
+        <span>
+            用户: <input type="text" name="username">
+        </span>
+        <br>
+        <span>
+            密码: <input type="password" name="password">
+        </span>
+        <br>
+          {% if error %}
+          <p id="error_info">{{ error }}</p>
+          {% endif %}
+        <br>
+        <span>
+            <input class="button0" type="submit" name="submit1" value="登录">
+        </span>
+        </form>
+    </div>
+        <div class="container">
+        <form action='../register/' class="form2">
+          <input class="button0" type="submit" name="to_register" value="还没有账号？去注册">
+        </form>
+      </div>
+
+
+    </br>
+  </br>
+  </br>
+    <div class="card-container">
+    <div class="guidelines-card">
+      使用指南：
+      <ul>
+          <li>点击红点或排行榜进入论坛</li>
+          <li>点击头像位置上传头像</li>
+          <li>保护隐私，文明发言</li>
+      </ul>
+  </div>
+  </div>
+
+
+    <footer>
+      <p>&copy; 2023 校园食评</p>
+    </footer>
+{#    <script src="js/echarts.min.js"></script>#}
+{#    <script src="js/baidu.js"></script>#}
+{#    <script src="js/bmap.min.js"></script>#}
+{#    <script type="text/javascript" src="js/self-map.js"></script>#}
+{#    <script type="text/javascript" src="js/self-chart.js"></script>#}
+  {% if request.user.is_authenticated %}
+
+{% endif %}
+
+
+  </body>
+
+</html>
